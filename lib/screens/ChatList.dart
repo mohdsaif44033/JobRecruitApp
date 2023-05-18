@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobrecruitproject/common/CommonWidgets.dart';
 import 'package:jobrecruitproject/controllers/ChatListController.dart';
 import 'package:jobrecruitproject/screens/SliderPage.dart';
 
@@ -14,66 +15,25 @@ class ChatList extends StatelessWidget {
       appBar: AppBar(
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 8.0, top: 10),
+            padding: const EdgeInsets.only(right: 15.0, top: 15.0),
             child: CircleAvatar(
                 backgroundImage: AssetImage("lib/assets/profile.png"),
-                radius: 25),
+                radius: 20),
           )
         ],
         backgroundColor: Colors.white,
         elevation: 0.0,
         foregroundColor: Colors.lightGreen,
       ),
-      drawer: Drawer(
-        width: 311,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              backgroundImage: AssetImage("lib/assets/profile.png"),
-              radius: 52.0,
-            ),
-            SizedBox(
-              height: 11,
-            ),
-            Text(
-              "Sachin Chh",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-            SizedBox(height: 4),
-            Text("sachin@test.com",
-                style: TextStyle(color: Colors.grey, fontSize: 12)),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle:
-                    const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-              ),
-              onPressed: () {},
-              child: Text(
-                'Edit Profile',
-                style: TextStyle(
-                    color: Colors.lightGreen, fontWeight: FontWeight.w500),
-              ),
-            ),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: 4,
-              itemBuilder: (BuildContext context, int chatIndex) {
-                return drawerCard(
-                    context, "lib/assets/icon.png", "My Job Application");
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: commonDrawer(),
       bottomNavigationBar: bottomNavBar(),
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(top:22.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
               TextField(
+                
                 decoration: InputDecoration(
                     prefixIcon: Icon(
                       Icons.search,
@@ -81,6 +41,7 @@ class ChatList extends StatelessWidget {
                     ),
                     hintText: "Search message..."),
               ),
+              SizedBox(height: 22,),
               ListView.builder(
                 shrinkWrap: true,
                 itemCount: 4,
@@ -94,126 +55,6 @@ class ChatList extends StatelessWidget {
       ),
     );
   }
-}
-
-Widget chatCard(BuildContext context) {
-  return Padding(
-    padding: const EdgeInsets.only(top: 6.0),
-    child: GestureDetector(
-      onTap: () {},
-      child: SizedBox(
-        height: 90,
-        width: 40,
-        child: Card(
-            elevation: 0.0,
-            child: Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 8, right: 8),
-                  child: CircleAvatar(
-                    backgroundImage: AssetImage("lib/assets/profile.png"),
-                    radius: 28,
-                  ),
-                ),
-                SizedBox(
-                  height: 90,
-                  width: Get.width * 0.75,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Sebastian Rudiger",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 16),
-                          ),
-                          SizedBox(height: 6),
-                          Text(
-                            "Perfect will check it",
-                            style: TextStyle(
-                                color: Color.fromARGB(255, 103, 101, 101)),
-                          )
-                        ],
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        children: [
-                          Text("5m ago", style: TextStyle(color: Colors.grey)),
-                          SizedBox(height: 9),
-                          Icon(
-                            Icons.circle,
-                            color: Colors.lightGreen,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ],
-            )),
-      ),
-    ),
-  );
-}
-
-Widget bottomNavBar() {
-  return Container(
-   
-    height: 60,
-    color: Color.fromARGB(255, 175, 250, 177),
-    child: Row(
-      children: [
-        GestureDetector( 
-          child: Container(
-            width: Get.width / 3,
-            color: Colors.white,
-            child: Column(mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.business_center,color: Colors.lightGreen,size: 32),
-                Text(
-                  'Active Jobs',
-                  style: TextStyle(fontSize: 10),
-                )
-              ],
-            ),
-          ),
-        ),
-                GestureDetector(
-                  child: Container(
-                          width: Get.width / 3,
-                          color: Colors.white,
-                          child: Column(mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.chat,color: Colors.lightGreen,size: 32),
-                              Text(
-                  'Chat',
-                  style: TextStyle(fontSize: 10),
-                              )
-                            ],
-                          ),
-                        ),
-                ),        GestureDetector(
-                  child: Container(
-                          width: Get.width / 3,
-                          color: Colors.white,
-                          child: Column(mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.supervisor_account_sharp,color: Colors.lightGreen,size: 32),
-                              Text(
-                  'Connections',
-                  style: TextStyle(fontSize: 10),
-                              )
-                            ],
-                          ),
-                        ),
-                )
-      ],
-    ),
-  );
 }
 
 // Widget bottomNavBar() {
@@ -262,19 +103,3 @@ Widget bottomNavBar() {
 //       ]);
 // }
 
-Widget drawerCard(BuildContext context, icon, text) {
-  return Row(
-    mainAxisAlignment: MainAxisAlignment.start,
-    crossAxisAlignment: CrossAxisAlignment.start,
-    children: [
-      Padding(
-        padding: const EdgeInsets.only(left: 22.0, right: 18.0, bottom: 25.0),
-        child: Image.asset(icon, scale: 1),
-      ),
-      Text(
-        text,
-        style: TextStyle(fontWeight: FontWeight.bold),
-      )
-    ],
-  );
-}

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobrecruitproject/common/CommonWidgets.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -32,7 +33,26 @@ class LoginPage extends StatelessWidget {
                             fontSize: 12,
                             fontWeight: FontWeight.w400,
                             color: Colors.grey),
-                      ),
+                      ),SizedBox(height: 35,),ToggleSwitch(
+  minWidth: 296.0,
+  minHeight: 42.5,
+  cornerRadius: 20.0,
+  borderColor: [Colors.grey],
+  borderWidth: 0.2,
+  activeBgColors: [[Colors.grey!], [Colors.grey!]],
+  activeFgColor: Colors.black,
+  inactiveBgColor: Colors.white,
+  inactiveFgColor: Colors.grey,
+  initialLabelIndex: 1,
+  totalSwitches: 2,  
+  labels: ['Candidate', 'Recruiter',],
+  fontSize: 15,
+  
+  radiusStyle: true,
+  onToggle: (index) {
+    print('switched to: $index');
+  },
+),
                     ],
                   ),
                 ),
@@ -40,14 +60,14 @@ class LoginPage extends StatelessWidget {
              
               Padding(
                   padding: const EdgeInsets.only(
-                      left: 15.0, top: 1, bottom: 8.0, right: 15.0),
+                      left: 15.0, top: 36.5, bottom: 8.0, right: 15.0),
                   child: formTextField(
                       100.0, Get.width, "Email", "Type Email Here...")),
               Padding(
                   padding: const EdgeInsets.only(left: 15.0, top: 1, right: 15.0),
                   child: formTextField(100.0, Get.width, "Password", "Password")),
               Padding(
-                padding: const EdgeInsets.only(left: 29.0, right: 31.0),
+                padding: const EdgeInsets.only(left: 20.0, right: 11.0,bottom: 26),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
