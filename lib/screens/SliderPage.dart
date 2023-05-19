@@ -2,13 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobrecruitproject/common/CommonSliderWidget.dart';
 import 'package:jobrecruitproject/controllers/SliderPageController.dart';
+import 'package:jobrecruitproject/screens/SignupPage.dart';
 import 'package:page_view_dot_indicator/page_view_dot_indicator.dart';
-
-
 
 class SliderPage extends StatelessWidget {
   SliderPage({super.key});
-  late  PageController _pageController;
+  late PageController _pageController;
 
   SliderPageController sliderPageController = Get.put(SliderPageController());
   @override
@@ -19,9 +18,10 @@ class SliderPage extends StatelessWidget {
       body: SafeArea(
           child: Obx(
         () => Container(
-          height: Get.height*0.9,
+          height: Get.height * 0.9,
           color: Colors.white,
-          child: Column(mainAxisAlignment: MainAxisAlignment.start,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Image(image: AssetImage("lib/assets/ellipse.png")),
               Expanded(
@@ -33,19 +33,27 @@ class SliderPage extends StatelessWidget {
                   children: List.generate(4, (index) {
                     return index == 0
                         ? Center(
-                            child: commonSliderWidget("Lorem Ipsum", "Lorem ipsum dolor sit amet, consecttutr\n adisdcinpgelit, sed do eiusmod tempor",
+                            child: commonSliderWidget(
+                                "Lorem Ipsum",
+                                "Lorem ipsum dolor sit amet, consecttutr\n adisdcinpgelit, sed do eiusmod tempor",
                                 "lib/assets/sliderImage1.png"))
                         : index == 1
                             ? Center(
-                                child: commonSliderWidget("Lorem Ipsum",
-                                    "Lorem ipsum dolor sit amet, consecttutr\n adisdcinpg elit, sed do eiusmod tempor", "lib/assets/sliderImage2.png"))
+                                child: commonSliderWidget(
+                                    "Lorem Ipsum",
+                                    "Lorem ipsum dolor sit amet, consecttutr\n adisdcinpg elit, sed do eiusmod tempor",
+                                    "lib/assets/sliderImage2.png"))
                             : index == 2
                                 ? Center(
-                                    child: commonSliderWidget("title 2",
-                                        "subtitle 2", "lib/assets/sliderImage2.png"))
+                                    child: commonSliderWidget(
+                                        "title 2",
+                                        "subtitle 2",
+                                        "lib/assets/sliderImage2.png"))
                                 : Center(
-                                    child: commonSliderWidget("title 3",
-                                        "subtitle 3", "lib/assets/sliderImage2.png"));
+                                    child: commonSliderWidget(
+                                        "title 3",
+                                        "subtitle 3",
+                                        "lib/assets/sliderImage2.png"));
                   }),
                 ),
               ),
@@ -68,48 +76,101 @@ class SliderPage extends StatelessWidget {
                 color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 1),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            fixedSize: Size.fromWidth(Get.width * 0.45),
-                            foregroundColor: sliderPageController.isSeletedSkip.value? Colors.white :Colors.lightGreen,
-                            backgroundColor: sliderPageController.isSeletedSkip.value? Colors.lightGreen : Colors.white,
-                            padding: const EdgeInsets.all(10.0),
-                            textStyle: const TextStyle(fontSize: 22),
-                          ),
-                          onPressed: () {
-                            sliderPageController.isSeletedSkip.value = true;
-                            sliderPageController.isSeletedNext.value = false;
-                          },
-                          child: Text(
-                            'Skip',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                        TextButton(
-                          style: TextButton.styleFrom(
-                            fixedSize: Size.fromWidth(Get.width * 0.46),
-                             foregroundColor: sliderPageController.isSeletedNext.value? Colors.white :Colors.lightGreen,
-                            backgroundColor: sliderPageController.isSeletedNext.value? Colors.lightGreen : Colors.white,
-                            padding: const EdgeInsets.all(10.0),
-                            textStyle: const TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.w600),
-                          ),
-                          onPressed: () {sliderPageController.selectedIndex.value = sliderPageController.selectedIndex.value +1;
-                            sliderPageController.isSeletedNext.value = true;
-                            sliderPageController.isSeletedSkip.value = false;
-                          },
-                          child: Text(
-                            'Next',
-                            style: TextStyle(
-                                fontSize: 18, fontWeight: FontWeight.w600),
-                          ),
-                        ),
-                      ]),
+                  child: Obx(
+                    () => Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          sliderPageController.selectedIndex.value == 3
+                              ? TextButton(
+                                  style: TextButton.styleFrom(
+                                    fixedSize: Size.fromWidth(Get.width * 0.6),
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: Colors.lightGreen,
+                                    padding: const EdgeInsets.all(10.0),
+                                    textStyle: const TextStyle(fontSize: 22),
+                                  ),
+                                  onPressed: () {
+                                    Get.to(SignUpPage());
+                                  },
+                                  child: Text(
+                                    'Explore',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                )
+                              : TextButton(
+                                  style: TextButton.styleFrom(
+                                    fixedSize: Size.fromWidth(Get.width * 0.45),
+                                    foregroundColor:
+                                        sliderPageController.isSeletedSkip.value
+                                            ? Colors.white
+                                            : Colors.lightGreen,
+                                    backgroundColor:
+                                        sliderPageController.isSeletedSkip.value
+                                            ? Colors.lightGreen
+                                            : Colors.white,
+                                    padding: const EdgeInsets.all(10.0),
+                                    textStyle: const TextStyle(fontSize: 22),
+                                  ),
+                                  onPressed: () {
+                                    Get.to(SignUpPage());
+                                    sliderPageController.isSeletedSkip.value =
+                                        true;
+                                    sliderPageController.isSeletedNext.value =
+                                        false;
+                                  },
+                                  child: Text(
+                                    'Skip',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                          sliderPageController.selectedIndex.value == 3
+                              ? Container()
+                              : TextButton(
+                                  style: TextButton.styleFrom(
+                                    fixedSize: Size.fromWidth(Get.width * 0.46),
+                                    foregroundColor:
+                                        sliderPageController.isSeletedNext.value
+                                            ? Colors.white
+                                            : Colors.lightGreen,
+                                    backgroundColor:
+                                        sliderPageController.isSeletedNext.value
+                                            ? Colors.lightGreen
+                                            : Colors.white,
+                                    padding: const EdgeInsets.all(10.0),
+                                    textStyle: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  onPressed: () {
+                                    sliderPageController.selectedIndex.value =
+                                        sliderPageController
+                                                .selectedIndex.value +
+                                            1;
+                                    _pageController.animateToPage(
+                                        sliderPageController
+                                            .selectedIndex.value,
+                                        duration: Duration(milliseconds: 100),
+                                        curve: Curves.ease);
+
+                                    sliderPageController.isSeletedNext.value =
+                                        true;
+                                    sliderPageController.isSeletedSkip.value =
+                                        false;
+                                  },
+                                  child: Text(
+                                    'Next',
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                )
+                        ]),
+                  ),
                 ),
               ),
             ],

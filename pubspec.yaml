@@ -71,6 +71,7 @@ flutter:
     - lib/assets/sliderImage1.png
     - lib/assets/sliderImage2.png
     - lib/assets/ellipse.png
+    - lib/assets/checkBoxUnselect.png
 
 
   # To add assets to your application, add an assets section, like this:

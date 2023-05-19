@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobrecruitproject/common/CommonWidgets.dart';
+import 'package:jobrecruitproject/controllers/SignUpController.dart';
+import 'package:jobrecruitproject/screens/LoginPage.dart';
 
 class SignUpPage extends StatelessWidget {
   SignUpPage({super.key});
-  //  SignUpController signUpPageController = Get.put(SignUpController());
+   SignUpController signUpPageController = Get.put(SignUpController());
 
   @override
   Widget build(BuildContext context) {
@@ -41,15 +43,15 @@ class SignUpPage extends StatelessWidget {
                   padding: const EdgeInsets.only(
                       left: 15.0, top: 40, bottom: 8.0, right: 15.0),
                   child: formTextField(
-                      100.0, Get.width, "Full name", "Type name Here...")),
+                      100.0, Get.width, "Full name", "Type name Here...",signUpPageController.name)),
               Padding(
                   padding: const EdgeInsets.only(
                       left: 15.0, top: 1, bottom: 8.0, right: 15.0),
                   child: formTextField(
-                      100.0, Get.width, "Email", "Type Email Here...")),
+                      100.0, Get.width, "Email", "Type Email Here...",signUpPageController.email)),
               Padding(
                   padding: const EdgeInsets.only(left: 15.0, top: 1, right: 15.0),
-                  child: formTextField(100.0, Get.width, "Password", "Password")),
+                  child: formTextField(100.0, Get.width, "Password", "Password",signUpPageController.password)),
               Padding(
                 padding: const EdgeInsets.only(left: 29.0, right: 31.0),
                 child: Row(
@@ -57,17 +59,26 @@ class SignUpPage extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Container(
-                            height: 24,
-                            width: 24,
-                            color: Color.fromARGB(106, 214, 182, 20)),
-                        SizedBox(
-                          width: 17,
-                        ),
-                        Text(
-                          "Remember me",
-                          style: TextStyle(fontSize: 12),
-                        )
+                          Obx(() => GestureDetector(
+                              onTap: (() => signUpPageController.isRememberMe.value =
+                                  !signUpPageController.isRememberMe.value),
+                              child: Row(children: [
+                                signUpPageController.isRememberMe.value
+                                    ? Icon(
+                                        Icons.check_box,
+                                        color: Colors.lightGreen,
+                                      )
+                                    : Container(
+                                        height: 24,
+                                        width: 24,
+                                        color:
+                                            Color.fromARGB(106, 214, 182, 20)),
+                                Text(
+                                  "   Remember me",
+                                  style: TextStyle(fontSize: 12),
+                                )
+                              ]),
+                            ))
                       ],
                     ),
                     TextButton(
@@ -101,7 +112,7 @@ class SignUpPage extends StatelessWidget {
                                                     fontWeight: FontWeight.w400),
                                               ),
                                               onPressed: () {
-                                               
+                                               Get.to(LoginPage());
                                               },
                                               child: const Text('Sign in',style: TextStyle(color: Colors.lightGreen,decoration: TextDecoration.underline),),
                                             )

@@ -1,8 +1,10 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
+
 // Common Text Field
-formTextField(height, width, text, hintText) {
+formTextField(height, width, text, hintText,textEditingController) {
+  var showPass = false.obs;
   return Container(
     height: height,
     width: width,
@@ -13,8 +15,9 @@ formTextField(height, width, text, hintText) {
       ),
       Padding(
         padding: const EdgeInsets.only(top: 8.0),
-        child: TextField(
-          obscureText: hintText == "Password" ? true : false,
+        child:Obx(()=> TextField(
+          controller: textEditingController,
+          obscureText:showPass.value? false : hintText == 'Password'? true :false,
           decoration: InputDecoration(
               focusedBorder: OutlineInputBorder(
                   borderSide: const BorderSide(
@@ -25,18 +28,20 @@ formTextField(height, width, text, hintText) {
                   borderRadius: BorderRadius.circular(12)),
               hintText: hintText,
               suffixIcon: hintText == "Password"
-                  ? GestureDetector(onTap: () {
-                    
-                  },
-                    child: Icon(
-                        Icons.visibility_off_outlined,
-                        color: Colors.grey,
+                  ? Obx
+                  (() => 
+                     GestureDetector(
+                        onTap: () {showPass.value = !showPass.value;},
+                        child: Icon( showPass.value?
+                          Icons.visibility_outlined: Icons.visibility_off_outlined,
+                          color: Colors.grey,
+                        ),
                       ),
                   )
                   : SizedBox(
                       height: 1,
                     )),
-        ),
+        ),)
       ),
     ]),
   );
@@ -53,15 +58,21 @@ CommonButton(alignment, height, width, color, text, textColor) {
       color: color,
       borderRadius: BorderRadius.all(Radius.circular(7)),
     ),
-    child: Row(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.center,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(text,
             style: TextStyle(
                 color: textColor, fontSize: 14, fontWeight: FontWeight.w700)),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: text == "SIGN UP WITH" || text == "SIGN IN WITH" ? Image.asset("lib/assets/image3.png") : SizedBox(width: 1,),
-                )
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: text == "SIGN UP WITH" || text == "SIGN IN WITH"
+              ? Image.asset("lib/assets/image3.png")
+              : SizedBox(
+                  width: 1,
+                ),
+        )
       ],
     ),
   );
@@ -70,18 +81,18 @@ CommonButton(alignment, height, width, color, text, textColor) {
 // Bottom Navigation Bar
 Widget bottomNavBar() {
   return Container(
-   
     height: 60,
     color: Color.fromARGB(255, 175, 250, 177),
     child: Row(
       children: [
-        GestureDetector( 
+        GestureDetector(
           child: Container(
             width: Get.width / 3,
             color: Colors.white,
-            child: Column(mainAxisAlignment: MainAxisAlignment.center,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(Icons.business_center,color: Colors.lightGreen,size: 32),
+                Icon(Icons.business_center, color: Colors.lightGreen, size: 32),
                 Text(
                   'Active Jobs',
                   style: TextStyle(fontSize: 10),
@@ -90,35 +101,39 @@ Widget bottomNavBar() {
             ),
           ),
         ),
-                GestureDetector(
-                  child: Container(
-                          width: Get.width / 3,
-                          color: Colors.white,
-                          child: Column(mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.chat,color: Colors.lightGreen,size: 32),
-                              Text(
+        GestureDetector(
+          child: Container(
+            width: Get.width / 3,
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.chat, color: Colors.lightGreen, size: 32),
+                Text(
                   'Chat',
                   style: TextStyle(fontSize: 10),
-                              )
-                            ],
-                          ),
-                        ),
-                ),        GestureDetector(
-                  child: Container(
-                          width: Get.width / 3,
-                          color: Colors.white,
-                          child: Column(mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(Icons.supervisor_account_sharp,color: Colors.lightGreen,size: 32),
-                              Text(
+                )
+              ],
+            ),
+          ),
+        ),
+        GestureDetector(
+          child: Container(
+            width: Get.width / 3,
+            color: Colors.white,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.supervisor_account_sharp,
+                    color: Colors.lightGreen, size: 32),
+                Text(
                   'Connections',
                   style: TextStyle(fontSize: 10),
-                              )
-                            ],
-                          ),
-                        ),
                 )
+              ],
+            ),
+          ),
+        )
       ],
     ),
   );
@@ -129,7 +144,7 @@ Widget chatCard(BuildContext context) {
   return GestureDetector(
     onTap: () {},
     child: Padding(
-      padding: const EdgeInsets.only(top:10.0),
+      padding: const EdgeInsets.only(top: 10.0),
       child: SizedBox(
         height: 70,
         width: 40,
@@ -216,21 +231,29 @@ Widget connectionCard(BuildContext context, image, name, designation) {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Padding(
-          padding: const EdgeInsets.only(left:30.0, right: 15,),
+          padding: const EdgeInsets.only(
+            left: 30.0,
+            right: 15,
+          ),
           child: CircleAvatar(
-                      backgroundImage: AssetImage(image),
-                      radius: 25,
-                    ),
+            backgroundImage: AssetImage(image),
+            radius: 25,
+          ),
         ),
-        Column(mainAxisAlignment: MainAxisAlignment.center,crossAxisAlignment: CrossAxisAlignment.start,
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
               name,
-              style: TextStyle(fontWeight: FontWeight.bold,fontSize: 14),
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14),
             ),
             SizedBox(height: 3),
-            Text(designation,style: TextStyle(
-                                  color: Color.fromARGB(255, 103, 101, 101),fontSize: 13),)
+            Text(
+              designation,
+              style: TextStyle(
+                  color: Color.fromARGB(255, 103, 101, 101), fontSize: 13),
+            )
           ],
         )
       ],
@@ -238,48 +261,48 @@ Widget connectionCard(BuildContext context, image, name, designation) {
   );
 }
 
-Widget commonDrawer (){
+Widget commonDrawer() {
   return Drawer(
-        width: 311,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              backgroundImage: AssetImage("lib/assets/profile.png"),
-              radius: 52.0,
-            ),
-            SizedBox(
-              height: 11,
-            ),
-            Text(
-              "Sachin Chh",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
-            SizedBox(height: 4),
-            Text("sachin@test.com",
-                style: TextStyle(color: Colors.grey, fontSize: 12)),
-            TextButton(
-              style: TextButton.styleFrom(
-                textStyle:
-                    const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
-              ),
-              onPressed: () {},
-              child: Text(
-                'Edit Profile',
-                style: TextStyle(
-                    color: Colors.lightGreen, fontWeight: FontWeight.w500),
-              ),
-            ),
-            ListView.builder(
-              shrinkWrap: true,
-              itemCount: 4,
-              itemBuilder: (BuildContext context, int chatIndex) {
-                return drawerCard(
-                    context, "lib/assets/icon.png", "My Job Application");
-              },
-            ),
-          ],
+    width: 311,
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        CircleAvatar(
+          backgroundImage: AssetImage("lib/assets/profile.png"),
+          radius: 52.0,
         ),
-      );
+        SizedBox(
+          height: 11,
+        ),
+        Text(
+          "Sachin Chh",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+        SizedBox(height: 4),
+        Text("sachin@test.com",
+            style: TextStyle(color: Colors.grey, fontSize: 12)),
+        TextButton(
+          style: TextButton.styleFrom(
+            textStyle:
+                const TextStyle(fontSize: 14, fontWeight: FontWeight.w400),
+          ),
+          onPressed: () {},
+          child: Text(
+            'Edit Profile',
+            style: TextStyle(
+                color: Colors.lightGreen, fontWeight: FontWeight.w500),
+          ),
+        ),
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: 4,
+          itemBuilder: (BuildContext context, int chatIndex) {
+            return drawerCard(
+                context, "lib/assets/icon.png", "My Job Application");
+          },
+        ),
+      ],
+    ),
+  );
 }

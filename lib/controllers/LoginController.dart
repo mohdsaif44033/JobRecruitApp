@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 // ignore: deprecated_member_use
-class SignUpController extends GetxController {
-  var isRememberMe = false.obs;
- 
+class LoginController extends GetxController {
 
-  TextEditingController name = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController password = TextEditingController();
+  var isRememberMe = false.obs;
 
   @override
   void onInit() {
