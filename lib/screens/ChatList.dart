@@ -15,7 +15,7 @@ class ChatList extends StatelessWidget {
       appBar: AppBar(
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 15.0, top: 15.0),
+            padding: const EdgeInsets.only(right: 15.0, top: 15.0,),
             child: CircleAvatar(
                 backgroundImage: AssetImage("lib/assets/profile.png"),
                 radius: 20),
@@ -28,18 +28,21 @@ class ChatList extends StatelessWidget {
       drawer: commonDrawer(),
       bottomNavigationBar: bottomNavBar(),
       body: Padding(
-        padding: const EdgeInsets.only(top:22.0),
+        padding: const EdgeInsets.only(top:12.0,),
         child: SingleChildScrollView(
           child: Column(
             children: [
-              TextField(
-                
-                decoration: InputDecoration(
-                    prefixIcon: Icon(
-                      Icons.search,
-                      color: Color.fromARGB(255, 73, 69, 69),
-                    ),
-                    hintText: "Search message..."),
+              Container(height: 50,alignment: Alignment.center,margin: EdgeInsets.only(left: 7,right: 10),color: Colors.white,
+                child: TextField(
+                  
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                      prefixIcon: Icon(
+                        Icons.search,
+                        color: Color.fromARGB(255, 73, 69, 69),
+                      ),
+                      hintText: "Search message..."),
+                ),
               ),
               SizedBox(height: 22,),
               ListView.builder(
@@ -56,50 +59,3 @@ class ChatList extends StatelessWidget {
     );
   }
 }
-
-// Widget bottomNavBar() {
-//    ChatListController chatlistcontroller = Get.put(ChatListController());
-
-//   return BottomNavigationBar(
-
-//       selectedItemColor: Colors.white,
-//       backgroundColor:chatlistcontroller.bottomNavBarSelectedItem == 0 ? Colors.white:Colors.lightGreen,
-//       unselectedItemColor: Colors.black,
-//       unselectedLabelStyle: TextStyle(color: Colors.black),
-//       iconSize: 32.0,
-//       selectedFontSize: 8.0,
-//       unselectedFontSize: 8.0,
-//       showUnselectedLabels: true,
-//       unselectedIconTheme: IconThemeData(color: Colors.lightGreen),
-//       selectedIconTheme: IconThemeData(color: Colors.white),
-//       currentIndex: 1,
-//       onTap: (value) {
-//              chatlistcontroller.bottomNavBarSelectedItem.value = value;
-
-//         //       if (chatlistcontroller.bottomNavBarSelectedItem == 0) {
-//         //         Get.to(SliderPage());
-//         //       } else if (chatlistcontroller.bottomNavBarSelectedItem == 1) {
-//         // Get.to(SliderPage());
-//         //       } else if (chatlistcontroller.bottomNavBarSelectedItem == 2) {
-//         //        Get.to(SliderPage());
-//         //       }
-//       },
-//       items: [
-//         BottomNavigationBarItem(
-//             icon: Icon(
-//               Icons.business_center,
-//             ),
-//             label: "Active Jobs"),
-//         BottomNavigationBarItem(
-//             icon: Icon(
-//               Icons.chat,
-//             ),
-//             label: "Chat"),
-//         const BottomNavigationBarItem(
-//             icon: Icon(
-//               Icons.supervisor_account_sharp,
-//             ),
-//             label: "Connections"),
-//       ]);
-// }
-

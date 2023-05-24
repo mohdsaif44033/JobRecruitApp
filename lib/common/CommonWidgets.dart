@@ -1,5 +1,9 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+import 'package:jobrecruitproject/screens/ActiveJobsPage.dart';
+import 'package:jobrecruitproject/screens/ChatList.dart';
+import 'package:jobrecruitproject/screens/ChatPage.dart';
+import 'package:jobrecruitproject/screens/ConnectionsPage.dart';
 
 
 // Common Text Field
@@ -80,61 +84,81 @@ CommonButton(alignment, height, width, color, text, textColor) {
 
 // Bottom Navigation Bar
 Widget bottomNavBar() {
+  var isSelectedActiveJobs = false.obs;
+  var isSelectedChat = false.obs;
+  var isSelectedConnections = false.obs;
   return Container(
     height: 60,
     color: Color.fromARGB(255, 175, 250, 177),
-    child: Row(
-      children: [
-        GestureDetector(
-          child: Container(
-            width: Get.width / 3,
-            color: Colors.white,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.business_center, color: Colors.lightGreen, size: 32),
-                Text(
-                  'Active Jobs',
-                  style: TextStyle(fontSize: 10),
-                )
-              ],
+    child: Obx(() => 
+       Row(
+        children: [
+          GestureDetector( onTap: () {
+            Get.to(ActiveJobs());
+            isSelectedActiveJobs.value = true;
+            isSelectedChat.value = false;
+            isSelectedConnections.value = false;
+          },
+            child: Container(
+              width: Get.width / 3,
+              color: isSelectedActiveJobs.value? Colors.lightGreen: Colors.white,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.business_center, color: isSelectedActiveJobs.value? Colors.white: Colors.lightGreen, size: 32),
+                  Text(
+                    'Active Jobs',
+                    style: TextStyle(fontSize: 10,color: isSelectedActiveJobs.value? Colors.white : Colors.black),
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-        GestureDetector(
-          child: Container(
-            width: Get.width / 3,
-            color: Colors.white,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.chat, color: Colors.lightGreen, size: 32),
-                Text(
-                  'Chat',
-                  style: TextStyle(fontSize: 10),
-                )
-              ],
+          GestureDetector(onTap: () {
+            Get.to(ChatList());
+            isSelectedActiveJobs.value = false;
+            isSelectedChat.value = true;
+            isSelectedConnections.value = false;
+          },
+            child: Container(
+              width: Get.width / 3,
+              color:isSelectedChat.value? Colors.lightGreen: Colors.white,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.chat, color:isSelectedChat.value? Colors.white: Colors.lightGreen, size: 32),
+                  Text(
+                    'Chat',
+                    style: TextStyle(fontSize: 10,color: isSelectedChat.value? Colors.white : Colors.black),
+                  )
+                ],
+              ),
             ),
           ),
-        ),
-        GestureDetector(
-          child: Container(
-            width: Get.width / 3,
-            color: Colors.white,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.supervisor_account_sharp,
-                    color: Colors.lightGreen, size: 32),
-                Text(
-                  'Connections',
-                  style: TextStyle(fontSize: 10),
-                )
-              ],
+          GestureDetector(onTap: () {
+            Get.to(ConnectionsPage());
+            isSelectedActiveJobs.value = false;
+            isSelectedChat.value = false;
+            isSelectedConnections.value = true;
+          },
+            child: Container(
+              width: Get.width / 3,
+              color: isSelectedConnections.value? Colors.lightGreen: Colors.white,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.supervisor_account_sharp,
+                      color:isSelectedConnections.value? Colors.white: Colors.lightGreen, size: 32),
+                  Text(
+                    'Connections',
+                    style: TextStyle(fontSize: 10,color: isSelectedConnections.value? Colors.white : Colors.black),
+                  )
+                ],
+              ),
             ),
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     ),
   );
 }
@@ -142,7 +166,9 @@ Widget bottomNavBar() {
 //Chat Card
 Widget chatCard(BuildContext context) {
   return GestureDetector(
-    onTap: () {},
+    onTap: () {
+      Get.to(ChatPage());
+    },
     child: Padding(
       padding: const EdgeInsets.only(top: 10.0),
       child: SizedBox(
@@ -188,10 +214,7 @@ Widget chatCard(BuildContext context) {
                         children: [
                           Text("5m ago", style: TextStyle(color: Colors.grey)),
                           SizedBox(height: 9),
-                          Icon(
-                            Icons.circle,
-                            color: Colors.lightGreen,
-                          )
+                         Container(alignment: Alignment.center,height: 20,width: 20,decoration: BoxDecoration(color: Colors.lightGreen,borderRadius: BorderRadius.circular(10)),child: Text("1",style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold),),)
                         ],
                       )
                     ],
@@ -306,3 +329,5 @@ Widget commonDrawer() {
     ),
   );
 }
+
+

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:jobrecruitproject/screens/ActiveJobsPage.dart';
 import 'package:jobrecruitproject/screens/ChatList.dart';
 import 'package:jobrecruitproject/screens/ChatPage.dart';
 import 'package:jobrecruitproject/screens/ConnectionsPage.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: "Home",
       debugShowCheckedModeBanner: false,
-      home: SplashScreen(),
+      home: LoginPage(),
     );
   }
 }

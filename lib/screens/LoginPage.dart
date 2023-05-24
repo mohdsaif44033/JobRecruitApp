@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:jobrecruitproject/common/CommonWidgets.dart';
 import 'package:jobrecruitproject/controllers/LoginController.dart';
+import 'package:jobrecruitproject/screens/ChatList.dart';
 import 'package:jobrecruitproject/screens/SignupPage.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -124,8 +125,10 @@ class LoginPage extends StatelessWidget {
                   ],
                 ),
               ),
-              CommonButton(Alignment.center, 50.0, 266.0, Colors.lightGreen,
-                  "LOGIN", Colors.white),
+              GestureDetector(onTap: (() {
+                Get.to(ChatList());
+              }),child: CommonButton(Alignment.center, 50.0, 266.0, Colors.lightGreen,
+                  "LOGIN", Colors.white),),
               SizedBox(
                 height: 14,
               ),

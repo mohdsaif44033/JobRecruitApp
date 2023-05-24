@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:jobrecruitproject/common/CommonWidgets.dart';
 
 class ConnectionsPage extends StatelessWidget {
@@ -10,9 +11,13 @@ class ConnectionsPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0.0,
-        leading: Icon(
-          Icons.arrow_back_ios_new,
-          color: Colors.black,
+        leading: GestureDetector(onTap: () {
+          Get.back();
+        },
+          child: Icon(
+            Icons.arrow_back_ios_new,
+            color: Colors.black,
+          ),
         ),
         title: Text(
           "My Connections",

@@ -4,8 +4,8 @@ import 'package:jobrecruitproject/common/CommonWidgets.dart';
 
 
 
-class ChatList extends StatelessWidget {
-  ChatList({super.key});
+class ActiveJobs extends StatelessWidget {
+  ActiveJobs({super.key});
 
 
   @override
